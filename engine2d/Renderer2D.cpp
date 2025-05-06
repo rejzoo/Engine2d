@@ -1,9 +1,10 @@
 #include "Renderer2D.h"
 
-Renderer2D::Renderer2D()
+Renderer2D::Renderer2D(Camera2D* camera)
 {
     InitQuad();
     m_shader = new Shader();
+    m_camera = camera;
 }
 
 Renderer2D::~Renderer2D()
@@ -20,7 +21,8 @@ void Renderer2D::Draw(glm::vec2 position, glm::vec2 size, glm::vec4 color)
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, glm::vec3(position, 0.0f));
     model = glm::scale(model, glm::vec3(size, 1.0f));
-    glm::mat4 projection = glm::ortho(0.0f, 800.0f, 800.0f, 0.0f, -1.0f, 1.0f);
+
+    glm::mat4 projection = m_camera->GetView();
 
     m_shader->SetMat4("model", model);
     m_shader->SetVec4("color", color);

@@ -2,28 +2,26 @@
 
 Window::Window()
 {
-	m_width = 800;
-	m_height = 800;
-	m_mainWindow = nullptr;
-	m_input = nullptr;
-}
-
-Window::Window(GLuint width, GLuint height) : m_width(width), m_height(height)
-{
+	m_width = EngineConfig::WINDOW_WIDTH;
+	m_height = EngineConfig::WINDOW_HEIGHT;
 	m_mainWindow = nullptr;
 	m_input = nullptr;
 }
 
 Window::~Window()
 {
-	delete m_mainWindow;
-	delete m_input;
 }
 
 
 bool Window::ShouldClose()
 {
 	return glfwWindowShouldClose(m_mainWindow);
+}
+
+void Window::SetInput(Input* input)
+{
+	m_input = input;
+	glfwSetWindowUserPointer(m_mainWindow, m_input);
 }
 
 int Window::Init()
@@ -40,6 +38,9 @@ int Window::Init()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+
+	//glfwWindowHint(GLFW_DECORATED, NULL); // Disable title bar
 
 	m_mainWindow = glfwCreateWindow(m_width, m_height, "engine2d", NULL, NULL);
 
@@ -49,9 +50,6 @@ int Window::Init()
 		glfwTerminate();
 		return 1;
 	}
-
-	m_input = new Input(m_mainWindow);
-	glfwSetWindowUserPointer(m_mainWindow, m_input);
 
 	glfwMakeContextCurrent(m_mainWindow);
 
@@ -65,10 +63,17 @@ int Window::Init()
 
 	glViewport(0, 0, m_width, m_height);
 	
+	glfwSetFramebufferSizeCallback(m_mainWindow, HandleResize);
+
 	return 0;
 }
 
 void Window::SwapBuffers()
 {
 	glfwSwapBuffers(m_mainWindow);
+}
+
+void Window::HandleResize(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
 }

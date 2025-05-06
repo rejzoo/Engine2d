@@ -5,6 +5,7 @@
 
 #include "Logger.h"
 #include "Input.h"
+#include "ConfigFile.h"
 
 class Window
 {
@@ -16,14 +17,19 @@ private:
 
 public:
 	Window();
-	Window(GLuint width, GLuint height);
 	~Window();
 
 	bool ShouldClose();
+	GLuint GetWidth() const { return m_width; }
+	GLuint GetHeight() const { return m_height; }
+	GLFWwindow* GetGLFWWindow() { return m_mainWindow; }
+
+	void SetInput(Input* input);
+
 	int Init();
 	void SwapBuffers();
+	
 
 private:
-
+	static void HandleResize(GLFWwindow* window, int width, int height);
 };
-

@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Shapes">
       <UniqueIdentifier>{17b1554a-a34b-4a77-b1cb-2f27848cd6c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Config">
+      <UniqueIdentifier>{489c1773-6d22-4cb7-a972-f0ce4a326103}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -45,6 +48,9 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Camera2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -66,6 +72,12 @@
       <Filter>Header Files\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigFile.h">
+      <Filter>Header Files\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

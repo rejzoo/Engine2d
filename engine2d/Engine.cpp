@@ -2,40 +2,43 @@
 
 Engine::Engine()
 {
-	m_window = nullptr;
-	m_renderer = nullptr;
+	m_window = new Window();
+	m_window->Init();
+
+	m_input = new Input(m_window->GetGLFWWindow());
+	m_window->SetInput(m_input);
+
+	m_camera = new Camera2D();
+	m_renderer = new Renderer2D(m_camera);
+
 }
 
 Engine::~Engine()
 {
 	Logger::Log(LogType::MESSAGE, "Engine Stopped.");
-	delete(m_window);
-	delete(m_renderer);
+	delete m_window;
+	delete m_renderer;
+	delete m_input;
 }
 
 void Engine::Run()
 {
 	Logger::Log(LogType::MESSAGE, "Engine Started.");
 
-	m_window = new Window();
-	m_window->Init();
+	Rectangle obj1(0, 0, 100, 100);
 
-	m_renderer = new Renderer2D();
+	GLfloat dt = 0, lastTime = 0;
 
-	Rectangle obj1(350, 100, 60, 500);
-	Rectangle obj2(150, 350, 500, 60);
-	Rectangle obj3(350, 100, 300, 60);
-	Rectangle obj4(590, 350, 60, 300);
-
-	
 	while (!m_window->ShouldClose())
 	{
+		GLfloat now = glfwGetTime();
+		dt = now - lastTime;
+		lastTime = now;
+
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		obj1.Draw(*m_renderer);
-		obj2.Draw(*m_renderer);
-		obj3.Draw(*m_renderer);
-		obj4.Draw(*m_renderer);
+		m_camera->Update(dt, { m_input->GetMouseX(), m_input->GetMouseY() });
 
 		m_window->SwapBuffers();
 		glfwPollEvents();
