@@ -59,5 +59,18 @@ void Input::HandleKeys(GLFWwindow* window, int key, int code, int action, int mo
 
 void Input::HandleMouse(GLFWwindow* window, double xPos, double yPos)
 {
+	Input* input = static_cast<Input*>(glfwGetWindowUserPointer(window));
 
+	if (input->m_mouseFirstMoved)
+	{
+		input->m_lastX = xPos;
+		input->m_lastY = yPos;
+		input->m_mouseFirstMoved = false;
+	}
+
+	input->m_xChange = xPos - input->m_lastX;
+	input->m_yChange = input->m_lastY - yPos;
+
+	input->m_lastX = xPos;
+	input->m_lastY = yPos;
 }

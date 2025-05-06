@@ -10,11 +10,20 @@ class Input
 private:
 	bool m_keys[1024];
 
+	// Mouse
+	GLfloat m_lastX;
+	GLfloat m_lastY;
+	GLfloat m_xChange;
+	GLfloat m_yChange;
+	bool m_mouseFirstMoved;
+
 	GLFWwindow* m_mainWindow;
 
 public:
 	Input(GLFWwindow* window);
 	bool KeyPressed(unsigned int key) const;
+	GLfloat GetMouseX() const { return m_lastX; }
+	GLfloat GetMouseY() const { return m_lastY; }
 	
 private:
 	void CreateCallBacks();
