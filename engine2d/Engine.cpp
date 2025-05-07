@@ -44,6 +44,7 @@ void Engine::Run()
 		m_camera->Update(dt, { m_input->GetMouseX(), m_input->GetMouseY() });
 		m_camera->CalculateZoom(m_input->GetMouseScrollY());
 		m_input->ResetMouseScrollData();
+		m_input->ResetKeyPressed();
 
 		m_window->SwapBuffers();
 		glfwPollEvents();

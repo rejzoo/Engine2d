@@ -10,7 +10,10 @@ class Window;
 class Input
 {
 private:
+	Window* m_mainWindow;
+
 	bool m_keys[1024];
+	bool m_keysHeld[1024];
 
 	// Mouse
 	GLfloat m_lastX;
@@ -20,16 +23,16 @@ private:
 	bool m_mouseFirstMoved;
 	GLfloat m_mScrollY;
 
-	Window* m_mainWindow;
-
 public:
 	Input(Window* window);
 	bool KeyPressed(unsigned int key) const;
+	bool KeyHeld(unsigned int key) const;
 	GLfloat GetMouseX() const { return m_lastX; }
 	GLfloat GetMouseY() const { return m_lastY; }
 	GLfloat GetMouseScrollY() const { return m_mScrollY; }
 
 	void ResetMouseScrollData();
+	void ResetKeyPressed();
 	
 private:
 	void CreateCallBacks();

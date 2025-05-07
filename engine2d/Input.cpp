@@ -8,6 +8,11 @@ Input::Input(Window* window) : m_mainWindow(window)
 		m_keys[i] = 0;
 	}
 
+	for (int i = 0; i < 1024; i++)
+	{
+		m_keysHeld[i] = 0;
+	}
+
 	CreateCallBacks();
 }
 
@@ -16,16 +21,36 @@ bool Input::KeyPressed(unsigned int key) const
 	if (key >= 1024)
 	{
 		std::string message = key + " is out of range.";
-		Logger::Log(LogType::WARNING, message);
+		Logger::Log(LogType::ERROR, message);
 		return 0;
 	}
 
 	return m_keys[key];
 }
 
+bool Input::KeyHeld(unsigned int key) const
+{
+	if (key >= 1024)
+	{
+		std::string message = key + " is out of range.";
+		Logger::Log(LogType::ERROR, message);
+		return 0;
+	}
+
+	return m_keysHeld[key];
+}
+
 void Input::ResetMouseScrollData()
 {
 	m_mScrollY = 0;
+}
+
+void Input::ResetKeyPressed()
+{
+	for (int i = 0; i < 1024; i++)
+	{
+		m_keys[i] = 0;
+	}
 }
 
 void Input::CreateCallBacks()
@@ -53,12 +78,14 @@ void Input::HandleKeys(GLFWwindow* window, int key, int code, int action, int mo
 	{
 		if (action == GLFW_PRESS)
 		{
-			Logger::Log(LogType::DEBUG, std::to_string(key));
-			mainWindow->GetInput()->m_keys[key] = 1;
+			if (!mainWindow->GetInput()->m_keysHeld[key]) {
+				mainWindow->GetInput()->m_keys[key] = 1;
+			}
+			mainWindow->GetInput()->m_keysHeld[key] = 1;
 		}
 		else if (action == GLFW_RELEASE)
 		{
-			mainWindow->GetInput()->m_keys[key] = 0;
+			mainWindow->GetInput()->m_keysHeld[key] = 0;
 		}
 	}
 }
