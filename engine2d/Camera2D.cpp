@@ -7,9 +7,10 @@ Camera2D::Camera2D()
 	m_cameraMoveState = CameraMoveState::FOLLOW;
 	m_cameraZoomState = CameraZoomState::ZOOM;
 	m_targetObj = nullptr;
-	m_zoom = 0.5f;
+	m_zoom = CameraConfig::DEFAULT_ZOOM;
 
 	CalculateView();
+	CalculateBaseProjection();
 }
 
 Camera2D::~Camera2D()
@@ -80,6 +81,7 @@ void Camera2D::CalculateZoom(float scrollDirection)
 {
 	if (m_cameraZoomState != CameraZoomState::ZOOM)
 	{
+		m_projection = m_baseProjection;
 		return;
 	}
 
@@ -103,4 +105,12 @@ void Camera2D::CalculateView()
 	glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-m_position, 0.0f));
 
 	m_view = m_projection * view;
+}
+
+void Camera2D::CalculateBaseProjection()
+{
+	float halfW = EngineConfig::WINDOW_WIDTH * 0.5f;
+	float halfH = EngineConfig::WINDOW_HEIGHT * 0.5f;
+
+	m_baseProjection = glm::ortho(-halfW, +halfW, -halfH, +halfH, -1.0f, +1.0f);
 }

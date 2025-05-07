@@ -24,6 +24,7 @@ class Camera2D
 private:
 	glm::vec2 m_position;
 	glm::mat4 m_projection;
+	glm::mat4 m_baseProjection;
 	glm::mat4 m_view;
 	float m_zoom;
 
@@ -44,4 +45,5 @@ public:
 
 private:
 	void CalculateView();
+	void CalculateBaseProjection();
 };
