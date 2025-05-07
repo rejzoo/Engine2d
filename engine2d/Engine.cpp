@@ -42,6 +42,8 @@ void Engine::Run()
 		obj1.Draw(*m_renderer);
 
 		m_camera->Update(dt, { m_input->GetMouseX(), m_input->GetMouseY() });
+		m_camera->CalculateZoom(m_input->GetMouseScrollY());
+		m_input->ResetMouseScrollData();
 
 		m_window->SwapBuffers();
 		glfwPollEvents();

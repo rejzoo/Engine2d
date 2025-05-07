@@ -4,9 +4,10 @@
 Camera2D::Camera2D()
 {
 	m_position = { 0, 0 };
-	m_projection = glm::ortho(0.0f, EngineConfig::WINDOW_HEIGHT, EngineConfig::WINDOW_WIDTH, 0.0f, -1.0f, 1.0f);
-	m_cameraState = CameraState::MOUSE;
+	m_cameraMoveState = CameraMoveState::FOLLOW;
+	m_cameraZoomState = CameraZoomState::ZOOM;
 	m_targetObj = nullptr;
+	m_zoom = 0.5f;
 
 	CalculateView();
 }
@@ -22,12 +23,11 @@ void Camera2D::SetTarget(Rectangle* target)
 
 void Camera2D::Update(GLfloat dt, glm::vec2 position)
 {
-	if (m_cameraState == CameraState::STATIC)
+	if (m_cameraMoveState == CameraMoveState::STATIC)
 	{
 		return;
 	}
-
-	if (m_cameraState == CameraState::FOLLOW)
+	else if (m_cameraMoveState == CameraMoveState::FOLLOW)
 	{
 		if (!m_targetObj)
 		{
@@ -37,13 +37,11 @@ void Camera2D::Update(GLfloat dt, glm::vec2 position)
 		
 		glm::vec2 targetPos = m_targetObj->GetPosition();
 		glm::vec2 size = m_targetObj->GetSize();
+		glm::vec2 objCenter = targetPos + size * 0.5f;
 
-		glm::vec2 halfView = glm::vec2(EngineConfig::WINDOW_WIDTH * 0.5f - (size.x * 0.5), EngineConfig::WINDOW_HEIGHT * 0.5f - (size.y * 0.5));
-
-		m_position = targetPos - halfView;
+		m_position = objCenter;
 	}
-
-	if (m_cameraState == CameraState::MOUSE)
+	else if (m_cameraMoveState == CameraMoveState::MOUSE)
 	{
 		float x = position.x;
 		float y = position.y;
@@ -61,11 +59,11 @@ void Camera2D::Update(GLfloat dt, glm::vec2 position)
 
 		if (y >= 0 && y <= CameraConfig::MOVE_ZONE)
 		{
-			delta.y -= 1.0f;
+			delta.y += 1.0f;
 		}
 		else if (y <= EngineConfig::WINDOW_HEIGHT && y >= EngineConfig::WINDOW_HEIGHT - CameraConfig::MOVE_ZONE)
 		{
-			delta.y += 1.0f;
+			delta.y -= 1.0f;
 		}
 
 		if (delta != glm::vec2(0.0f))
@@ -76,6 +74,28 @@ void Camera2D::Update(GLfloat dt, glm::vec2 position)
 	}
 
 	CalculateView();
+}
+
+void Camera2D::CalculateZoom(float scrollDirection)
+{
+	if (m_cameraZoomState != CameraZoomState::ZOOM)
+	{
+		return;
+	}
+
+	if (scrollDirection == 1 && m_zoom <= CameraConfig::MAX_ZOOM)
+	{
+		m_zoom += CameraConfig::ZOOM_SPEED;
+	}
+	else if (scrollDirection == -1 && m_zoom >= CameraConfig::MIN_ZOOM)
+	{
+		m_zoom -= CameraConfig::ZOOM_SPEED;
+	}
+
+	float width = EngineConfig::WINDOW_WIDTH * 0.5f / m_zoom;
+	float height = EngineConfig::WINDOW_HEIGHT * 0.5f / m_zoom;
+
+	m_projection = glm::ortho(-width, +width, -height, +height, -1.0f, 1.0f);
 }
 
 void Camera2D::CalculateView()

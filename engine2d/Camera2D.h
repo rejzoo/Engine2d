@@ -8,10 +8,15 @@
 
 class Rectangle;
 
-enum CameraState {
+enum CameraMoveState {
 	STATIC,
 	FOLLOW,
 	MOUSE
+};
+
+enum CameraZoomState {
+	ZOOM,
+	NO_ZOOM
 };
 
 class Camera2D
@@ -20,10 +25,12 @@ private:
 	glm::vec2 m_position;
 	glm::mat4 m_projection;
 	glm::mat4 m_view;
+	float m_zoom;
 
 	Rectangle* m_targetObj;
 
-	CameraState m_cameraState;
+	CameraMoveState m_cameraMoveState;
+	CameraZoomState m_cameraZoomState;
 
 public:
 	Camera2D();
@@ -33,8 +40,8 @@ public:
 	void SetTarget(Rectangle* target);
 
 	void Update(GLfloat dt, glm::vec2 position);
+	void CalculateZoom(float scrollDirection);
 
 private:
 	void CalculateView();
-
 };

@@ -23,10 +23,16 @@ bool Input::KeyPressed(unsigned int key) const
 	return m_keys[key];
 }
 
+void Input::ResetMouseScrollData()
+{
+	m_mScrollY = 0;
+}
+
 void Input::CreateCallBacks()
 {
 	glfwSetKeyCallback(m_mainWindow->GetGLFWWindow(), HandleKeys);
 	glfwSetCursorPosCallback(m_mainWindow->GetGLFWWindow(), HandleMouse);
+	glfwSetScrollCallback(m_mainWindow->GetGLFWWindow(), HandleScroll);
 }
 
 void Input::HandleKeys(GLFWwindow* window, int key, int code, int action, int mode)
@@ -34,7 +40,7 @@ void Input::HandleKeys(GLFWwindow* window, int key, int code, int action, int mo
 	Window* mainWindow = static_cast<Window*>(glfwGetWindowUserPointer(window));
 	if (!mainWindow)
 	{
-		Logger::Log(LogType::ERROR, "Input NULL");
+		Logger::Log(LogType::ERROR, "Window NULL");
 		return;
 	}
 
@@ -60,6 +66,11 @@ void Input::HandleKeys(GLFWwindow* window, int key, int code, int action, int mo
 void Input::HandleMouse(GLFWwindow* window, double xPos, double yPos)
 {
 	Window* mainWindow = static_cast<Window*>(glfwGetWindowUserPointer(window));
+	if (!mainWindow)
+	{
+		Logger::Log(LogType::ERROR, "Window NULL");
+		return;
+	}
 
 	if (mainWindow->GetInput()->m_mouseFirstMoved)
 	{
@@ -73,4 +84,16 @@ void Input::HandleMouse(GLFWwindow* window, double xPos, double yPos)
 
 	mainWindow->GetInput()->m_lastX = xPos;
 	mainWindow->GetInput()->m_lastY = yPos;
+}
+
+void Input::HandleScroll(GLFWwindow* window, double xOffset, double yOffset)
+{
+	Window* mainWindow = static_cast<Window*>(glfwGetWindowUserPointer(window));
+	if (!mainWindow)
+	{
+		Logger::Log(LogType::ERROR, "Window NULL");
+		return;
+	}
+
+	mainWindow->GetInput()->m_mScrollY = yOffset;
 }
