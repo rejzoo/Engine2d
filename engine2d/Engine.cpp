@@ -5,7 +5,7 @@ Engine::Engine()
 	m_window = new Window();
 	m_window->Init();
 
-	m_input = new Input(m_window->GetGLFWWindow());
+	m_input = new Input(m_window);
 	m_window->SetInput(m_input);
 
 	m_camera = new Camera2D();

@@ -1,6 +1,7 @@
 #include "Input.h"
+#include "Window.h"
 
-Input::Input(GLFWwindow* window) : m_mainWindow(window)
+Input::Input(Window* window) : m_mainWindow(window)
 {
 	for (int i = 0; i < 1024; i++)
 	{
@@ -24,19 +25,18 @@ bool Input::KeyPressed(unsigned int key) const
 
 void Input::CreateCallBacks()
 {
-	glfwSetKeyCallback(m_mainWindow, HandleKeys);
-	glfwSetCursorPosCallback(m_mainWindow, HandleMouse);
+	glfwSetKeyCallback(m_mainWindow->GetGLFWWindow(), HandleKeys);
+	glfwSetCursorPosCallback(m_mainWindow->GetGLFWWindow(), HandleMouse);
 }
 
 void Input::HandleKeys(GLFWwindow* window, int key, int code, int action, int mode)
 {
-	Input* input = static_cast<Input*>(glfwGetWindowUserPointer(window));
-	if (!input)
+	Window* mainWindow = static_cast<Window*>(glfwGetWindowUserPointer(window));
+	if (!mainWindow)
 	{
 		Logger::Log(LogType::ERROR, "Input NULL");
 		return;
 	}
-
 
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 	{
@@ -48,29 +48,29 @@ void Input::HandleKeys(GLFWwindow* window, int key, int code, int action, int mo
 		if (action == GLFW_PRESS)
 		{
 			Logger::Log(LogType::DEBUG, std::to_string(key));
-			input->m_keys[key] = 1;
+			mainWindow->GetInput()->m_keys[key] = 1;
 		}
 		else if (action == GLFW_RELEASE)
 		{
-			input->m_keys[key] = 0;
+			mainWindow->GetInput()->m_keys[key] = 0;
 		}
 	}
 }
 
 void Input::HandleMouse(GLFWwindow* window, double xPos, double yPos)
 {
-	Input* input = static_cast<Input*>(glfwGetWindowUserPointer(window));
+	Window* mainWindow = static_cast<Window*>(glfwGetWindowUserPointer(window));
 
-	if (input->m_mouseFirstMoved)
+	if (mainWindow->GetInput()->m_mouseFirstMoved)
 	{
-		input->m_lastX = xPos;
-		input->m_lastY = yPos;
-		input->m_mouseFirstMoved = false;
+		mainWindow->GetInput()->m_lastX = xPos;
+		mainWindow->GetInput()->m_lastY = yPos;
+		mainWindow->GetInput()->m_mouseFirstMoved = false;
 	}
 
-	input->m_xChange = xPos - input->m_lastX;
-	input->m_yChange = input->m_lastY - yPos;
+	mainWindow->GetInput()->m_xChange = xPos - mainWindow->GetInput()->m_lastX;
+	mainWindow->GetInput()->m_yChange = mainWindow->GetInput()->m_lastY - yPos;
 
-	input->m_lastX = xPos;
-	input->m_lastY = yPos;
+	mainWindow->GetInput()->m_lastX = xPos;
+	mainWindow->GetInput()->m_lastY = yPos;
 }

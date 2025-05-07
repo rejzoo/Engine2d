@@ -1,4 +1,5 @@
 #include "Window.h"
+#include "Logger.h"
 
 Window::Window()
 {
@@ -21,7 +22,6 @@ bool Window::ShouldClose()
 void Window::SetInput(Input* input)
 {
 	m_input = input;
-	glfwSetWindowUserPointer(m_mainWindow, m_input);
 }
 
 int Window::Init()
@@ -52,6 +52,7 @@ int Window::Init()
 	}
 
 	glfwMakeContextCurrent(m_mainWindow);
+	glfwSetWindowUserPointer(m_mainWindow, this);
 
 	if (glewInit() != GLEW_OK)
 	{

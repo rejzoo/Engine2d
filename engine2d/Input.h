@@ -5,6 +5,8 @@
 
 #include "Logger.h"
 
+class Window;
+
 class Input
 {
 private:
@@ -17,10 +19,10 @@ private:
 	GLfloat m_yChange;
 	bool m_mouseFirstMoved;
 
-	GLFWwindow* m_mainWindow;
+	Window* m_mainWindow;
 
 public:
-	Input(GLFWwindow* window);
+	Input(Window* window);
 	bool KeyPressed(unsigned int key) const;
 	GLfloat GetMouseX() const { return m_lastX; }
 	GLfloat GetMouseY() const { return m_lastY; }

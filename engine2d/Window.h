@@ -3,10 +3,10 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "Input.h"
 #include "ConfigFile.h"
 
 class Logger;
+class Input;
 
 class Window
 {
@@ -24,6 +24,7 @@ public:
 	GLuint GetWidth() const { return m_width; }
 	GLuint GetHeight() const { return m_height; }
 	GLFWwindow* GetGLFWWindow() { return m_mainWindow; }
+	Input* GetInput() { return m_input; }
 
 	void SetInput(Input* input);
 
