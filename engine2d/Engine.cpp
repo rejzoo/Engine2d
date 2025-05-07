@@ -27,6 +27,8 @@ void Engine::Run()
 
 	Rectangle obj1(0, 0, 100, 100);
 
+	m_camera->SetTarget(&obj1);
+
 	GLfloat dt = 0, lastTime = 0;
 
 	while (!m_window->ShouldClose())
@@ -38,6 +40,7 @@ void Engine::Run()
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		obj1.Draw(*m_renderer);
+
 		m_camera->Update(dt, { m_input->GetMouseX(), m_input->GetMouseY() });
 
 		m_window->SwapBuffers();

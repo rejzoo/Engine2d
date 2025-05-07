@@ -34,4 +34,3 @@ private:
 	void CompileShader(const char* vertexCode, const char* fragmentCode);
 	void AddShader(GLuint program, const char* shaderCode, GLenum shaderType);
 };
-

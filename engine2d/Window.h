@@ -3,9 +3,10 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "Logger.h"
 #include "Input.h"
 #include "ConfigFile.h"
+
+class Logger;
 
 class Window
 {

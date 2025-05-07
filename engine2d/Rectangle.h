@@ -3,7 +3,8 @@
 #include <glm/glm.hpp>
 
 #include "Renderer2D.h"
-#include "Logger.h"
+
+class Logger;
 
 class Rectangle
 {
@@ -14,7 +15,11 @@ private:
 
 public:
 	Rectangle(int posX, int posY, int width, int height);
-	void Draw(Renderer2D& renderer) const;
 	~Rectangle();
+
+	glm::vec2 GetPosition() const { return m_position; }
+	glm::vec2 GetSize() const { return m_size; }
+
+	void Draw(Renderer2D& renderer) const;
 };
 

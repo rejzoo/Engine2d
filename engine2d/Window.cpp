@@ -64,7 +64,6 @@ int Window::Init()
 	glViewport(0, 0, m_width, m_height);
 	
 	glfwSetFramebufferSizeCallback(m_mainWindow, HandleResize);
-
 	return 0;
 }
 

@@ -6,10 +6,12 @@
 
 #include "ConfigFile.h"
 
+class Rectangle;
+
 enum CameraState {
 	STATIC,
-	MOUSE,
-	FOLLOW
+	FOLLOW,
+	MOUSE
 };
 
 class Camera2D
@@ -19,7 +21,7 @@ private:
 	glm::mat4 m_projection;
 	glm::mat4 m_view;
 
-	glm::vec2 m_targetCords;
+	Rectangle* m_targetObj;
 
 	CameraState m_cameraState;
 
@@ -28,11 +30,11 @@ public:
 	~Camera2D();
 
 	glm::mat4 GetView() const { return m_view; }
+	void SetTarget(Rectangle* target);
 
-	void Update(GLfloat dt, glm::vec2 mousePos);
+	void Update(GLfloat dt, glm::vec2 position);
 
 private:
 	void CalculateView();
 
 };
-

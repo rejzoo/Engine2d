@@ -1,10 +1,11 @@
 #pragma once
 
-#include "Logger.h"
 #include "Window.h"
 #include "Renderer2D.h"
 #include "Rectangle.h"
 #include "Camera2D.h"
+
+class Logger;
 
 class Engine
 {
