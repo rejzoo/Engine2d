@@ -34,6 +34,7 @@ void Camera2D::Update(GLfloat dt, glm::vec2 position)
 		{
 			Logger::Log(LogType::ERROR, "Camera state - FOLLOW but no target.");
 			return;
+			// TODO EXCEPTION
 		}
 		
 		glm::vec2 targetPos = m_targetObj->GetPosition();

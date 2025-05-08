@@ -7,6 +7,8 @@
 
 #include "Logger.h"
 #include "InputActions.h"
+#include "Exceptions.h"
+
 
 enum class KeySection {
 	MOVEMENT
@@ -15,7 +17,7 @@ enum class KeySection {
 class KeyBindings
 {
 private:
-	std::unordered_map<KeySection, std::unordered_map<MovementAction, std::vector<int>>> bindings;
+	std::unordered_map<KeySection, std::unordered_map<Action, std::vector<int>>> m_bindings;
 
 public:
 	KeyBindings();
@@ -23,6 +25,6 @@ public:
 private:
 	void LoadFromJson();
 	KeySection SectionFromString(const std::string& section);
-	MovementAction MoveActionFromString(const std::string& action);
+	Action ActionFromString(const std::string& action);
 };
 

@@ -107,6 +107,9 @@
     <ClInclude Include="KeyBindings.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
+    <ClInclude Include="Exceptions.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="KeyBindings.json">
