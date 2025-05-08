@@ -8,13 +8,13 @@
 
 class Rectangle;
 
-enum CameraMoveState {
+enum class CameraMoveState {
 	STATIC,
 	FOLLOW,
 	MOUSE
 };
 
-enum CameraZoomState {
+enum class CameraZoomState {
 	ZOOM,
 	NO_ZOOM
 };
