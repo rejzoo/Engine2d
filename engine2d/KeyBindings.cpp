@@ -5,6 +5,15 @@ KeyBindings::KeyBindings()
 	LoadFromJson();
 }
 
+KeyBindings::~KeyBindings()
+{
+}
+
+std::vector<int> KeyBindings::GetKeys(KeySection section, Action action) const
+{
+    return m_bindings.at(section).at(action);
+}
+
 void KeyBindings::LoadFromJson()
 {
     Logger::Log(LogType::MESSAGE, "Started loading keybindings.");

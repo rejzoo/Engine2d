@@ -40,6 +40,18 @@
     <Filter Include="Source Files\Util">
       <UniqueIdentifier>{f6af9af3-b4e1-4881-85ec-f9fe16f0800f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Action">
+      <UniqueIdentifier>{2194f66c-696f-41d4-a220-aac839b99c7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Action">
+      <UniqueIdentifier>{d2cfd8c3-2fa5-4db0-9803-d43f006b6f96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Controller">
+      <UniqueIdentifier>{0b06c0d2-391e-4daf-bdd8-4ef9a70135e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controller">
+      <UniqueIdentifier>{3ff41f78-790a-4f71-bd26-3c905acef43d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -72,6 +84,9 @@
     <ClCompile Include="KeyBindings.cpp">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
+    <ClCompile Include="ActionMapper.cpp">
+      <Filter>Source Files\Action</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConfigFile.h">
@@ -101,14 +116,17 @@
     <ClInclude Include="Shader.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="InputActions.h">
-      <Filter>Header Files\Util</Filter>
-    </ClInclude>
     <ClInclude Include="KeyBindings.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
     <ClInclude Include="Exceptions.h">
       <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions.h">
+      <Filter>Header Files\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionMapper.h">
+      <Filter>Header Files\Action</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

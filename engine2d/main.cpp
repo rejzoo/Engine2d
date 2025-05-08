@@ -7,4 +7,7 @@ int main()
 	//engine.Run();
 
 	KeyBindings bidings;
+
+	// REWORK POINTERS TO THE REFERENCES * -> & attribs NO NEED
+	// Indicates required dependency?
 }

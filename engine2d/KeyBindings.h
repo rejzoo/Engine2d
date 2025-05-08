@@ -6,7 +6,7 @@
 #include <nlohmann/json.hpp>
 
 #include "Logger.h"
-#include "InputActions.h"
+#include "Actions.h"
 #include "Exceptions.h"
 
 
@@ -21,6 +21,9 @@ private:
 
 public:
 	KeyBindings();
+	~KeyBindings();
+
+	std::vector<int> GetKeys(KeySection section, Action action) const;
 
 private:
 	void LoadFromJson();
