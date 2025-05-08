@@ -1,6 +1,6 @@
 #pragma once
 
-enum class MovementAction {
+enum class Action {
     MOVE_UP,
     MOVE_DOWN,
     MOVE_LEFT,
