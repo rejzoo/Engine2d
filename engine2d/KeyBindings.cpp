@@ -1,17 +1,14 @@
 ﻿#include "KeyBindings.h"
 
-KeyBindings::KeyBindings()
-{
-	LoadFromJson();
-}
-
-KeyBindings::~KeyBindings()
-{
-}
 
 std::vector<int> KeyBindings::GetKeys(KeySection section, Action action) const
 {
     return m_bindings.at(section).at(action);
+}
+
+KeyBindings::KeyBindings()
+{
+    LoadFromJson();
 }
 
 void KeyBindings::LoadFromJson()

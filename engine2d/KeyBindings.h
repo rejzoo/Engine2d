@@ -20,12 +20,18 @@ private:
 	std::unordered_map<KeySection, std::unordered_map<Action, std::vector<int>>> m_bindings;
 
 public:
-	KeyBindings();
-	~KeyBindings();
+	KeyBindings(const KeyBindings&) = delete;
+	KeyBindings& operator=(const KeyBindings&) = delete;
+	static KeyBindings& Instance() {
+		static KeyBindings instance;
+		return instance;
+	}
 
 	std::vector<int> GetKeys(KeySection section, Action action) const;
 
 private:
+	KeyBindings();
+	~KeyBindings() {};
 	void LoadFromJson();
 	KeySection SectionFromString(const std::string& section);
 	Action ActionFromString(const std::string& action);

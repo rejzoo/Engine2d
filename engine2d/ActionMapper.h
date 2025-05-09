@@ -7,15 +7,17 @@ class ActionMapper
 {
 private:
 	const KeyBindings& m_bindings;
-	const Input& m_input;
+	const Input* m_input = nullptr;
 
-	ActionMapper(const KeyBindings& bindings, const Input& input);
-	~ActionMapper();
-
+public:
+	static ActionMapper& Instance() {
+		static ActionMapper instance;
+		return instance;
+	}
+	void Init(Input* input);
 	bool ActionDown(Action action) const;
 	bool ActionPressed(Action action) const;
 
-public:
-
+private:
+	ActionMapper() : m_bindings(KeyBindings::Instance()) {}
 };
-

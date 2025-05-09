@@ -1,20 +1,18 @@
 #include "ActionMapper.h"
 
-ActionMapper::ActionMapper(const KeyBindings & bindings, const Input & input)
-	: m_bindings(bindings), m_input(input)
+void ActionMapper::Init(Input* input)
 {
-
-}
-
-ActionMapper::~ActionMapper()
-{
+	if (!m_input)
+	{
+		m_input = input;
+	}
 }
 
 bool ActionMapper::ActionDown(Action action) const
 {
 	for (int key : m_bindings.GetKeys(KeySection::MOVEMENT, action))
 	{
-		if (m_input.KeyHeld(key))
+		if (m_input->KeyHeld(key))
 		{
 			return true;
 		}
@@ -27,7 +25,7 @@ bool ActionMapper::ActionPressed(Action action) const
 {
 	for (int key : m_bindings.GetKeys(KeySection::MOVEMENT, action))
 	{
-		if (m_input.KeyPressed(key))
+		if (m_input->KeyPressed(key))
 		{
 			return true;
 		}
