@@ -7,6 +7,7 @@
 #include "Input.h"
 #include "ActionMapper.h"
 #include "PlayerController.h"
+#include "Player.h"
 
 class Logger;
 

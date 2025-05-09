@@ -16,21 +16,26 @@ void PlayerController::Update(float dt)
 
 void PlayerController::UpdateMovement(float dt)
 {
+	int deltaX = 0;
+	int deltaY = 0;
+
 	if (m_actionMapper.ActionDown(Action::MOVE_UP))
 	{
-		Logger::Log(LogType::DEBUG, "MOVE UP");
+		deltaY = 1;
 	} 
 	else if (m_actionMapper.ActionDown(Action::MOVE_DOWN))
 	{
-		Logger::Log(LogType::DEBUG, "MOVE DOWN");
+		deltaY = -1;
 	}
 	
 	if (m_actionMapper.ActionDown(Action::MOVE_LEFT))
 	{
-		Logger::Log(LogType::DEBUG, "MOVE LEFT");
+		deltaX = -1;
 	}
 	else if (m_actionMapper.ActionDown(Action::MOVE_RIGHT))
 	{
-		Logger::Log(LogType::DEBUG, "MOVE RIGHT");
+		deltaX = 1;
 	}
+
+	m_player->Move(dt, deltaX, deltaY);
 }

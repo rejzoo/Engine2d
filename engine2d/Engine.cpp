@@ -21,6 +21,15 @@ void Engine::Run()
 
 	GLfloat dt = 0, lastTime = 0;
 
+	// DEBUG
+	Player* player = new Player(0, 0, 100, 100);
+	m_playerController->Controll(player);
+
+	m_camera->SetTarget(player);
+
+	GameObject obj(0, 0, 200, 200);
+
+	// DEBUG
 	while (!m_window->ShouldClose())
 	{
 		GLfloat now = glfwGetTime();
@@ -30,6 +39,8 @@ void Engine::Run()
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		Draw(dt);
+		player->Draw(m_renderer);
+		obj.Draw(m_renderer);
 		Update(dt);
 
 		m_window->SwapBuffers();
@@ -67,8 +78,5 @@ void Engine::Update(float dt)
 
 void Engine::Draw(float dt)
 {
-	Rectangle obj1(0, 0, 100, 100);
-
-	m_camera->SetTarget(&obj1);
-	obj1.Draw(*m_renderer);
+	
 }

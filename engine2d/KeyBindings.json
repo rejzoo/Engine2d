@@ -1,6 +1,6 @@
 {
     "MOVEMENT": {
-        "MOVE_UP": [ 87, 256 ],
+        "MOVE_UP": [ 87, 265 ],
         "MOVE_DOWN": [ 83, 264 ],
         "MOVE_LEFT": [ 65, 263 ],
         "MOVE_RIGHT": [ 68, 262 ]

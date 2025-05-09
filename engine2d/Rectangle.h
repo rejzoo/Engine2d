@@ -14,12 +14,14 @@ private:
 	glm::vec4 m_color;
 
 public:
+	Rectangle();
 	Rectangle(int posX, int posY, int width, int height);
 	~Rectangle();
 
 	glm::vec2 GetPosition() const { return m_position; }
 	glm::vec2 GetSize() const { return m_size; }
+	void SetPosition(glm::vec2 position);
 
-	void Draw(Renderer2D& renderer) const;
+	void Draw(Renderer2D* renderer) const;
 };
 
