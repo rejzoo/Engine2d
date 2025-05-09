@@ -149,6 +149,8 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="KeyBindings.cpp" />
     <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Renderer2D.cpp" />
     <ClCompile Include="main.cpp" />
@@ -165,6 +167,8 @@
     <ClInclude Include="Actions.h" />
     <ClInclude Include="KeyBindings.h" />
     <ClInclude Include="Logger.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Renderer2D.h" />
     <ClInclude Include="Shader.h" />

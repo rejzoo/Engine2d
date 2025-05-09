@@ -3,11 +3,6 @@
 
 int main()
 {
-	//Engine engine;
-	//engine.Run();
-
-	KeyBindings bidings;
-
-	// REWORK POINTERS TO THE REFERENCES * -> & attribs NO NEED
-	// Indicates required dependency?
+	Engine engine;
+	engine.Run();
 }

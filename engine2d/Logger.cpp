@@ -18,7 +18,7 @@ std::tuple<std::string, std::string> Logger::GetValues(const LogType logType)
 {
     switch (logType) {
         case LogType::MESSAGE:
-            return { "MESSAGE", "\033[34m" };
+            return { "MESSAGE", "\033[36m" };
         case LogType::DEBUG:
             return { "DEBUG",   "\033[32m" };
         case LogType::WARNING:
