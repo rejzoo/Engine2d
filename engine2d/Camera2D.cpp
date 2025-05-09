@@ -1,5 +1,5 @@
 #include "Camera2D.h"
-#include "Rectangle.h"
+#include "GameObject.h"
 
 Camera2D::Camera2D()
 {
@@ -17,7 +17,7 @@ Camera2D::~Camera2D()
 {
 }
 
-void Camera2D::SetTarget(Rectangle* target)
+void Camera2D::SetTarget(GameObject* target)
 {
 	m_targetObj = target;
 }

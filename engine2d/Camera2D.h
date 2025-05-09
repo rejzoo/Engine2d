@@ -6,7 +6,7 @@
 
 #include "ConfigFile.h"
 
-class Rectangle;
+class GameObject;
 
 enum class CameraMoveState {
 	STATIC,
@@ -28,7 +28,7 @@ private:
 	glm::mat4 m_view;
 	float m_zoom;
 
-	Rectangle* m_targetObj;
+	GameObject* m_targetObj;
 
 	CameraMoveState m_cameraMoveState;
 	CameraZoomState m_cameraZoomState;
@@ -38,7 +38,7 @@ public:
 	~Camera2D();
 
 	glm::mat4 GetView() const { return m_view; }
-	void SetTarget(Rectangle* target);
+	void SetTarget(GameObject* target);
 
 	void Update(GLfloat dt, glm::vec2 position);
 	void CalculateZoom(float scrollDirection);
