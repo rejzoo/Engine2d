@@ -69,6 +69,7 @@ void Shader::SetVec4(const std::string& name, glm::vec4 vector) const
 void Shader::CompileShader(const char* vertexCode, const char* fragmentCode)
 {
 	m_shaderID = glCreateProgram();
+	GLuint m_vertHandle, m_fragHandle;
 
 	if (!m_shaderID)
 	{
@@ -76,8 +77,8 @@ void Shader::CompileShader(const char* vertexCode, const char* fragmentCode)
 		return;
 	}
 
-	AddShader(m_shaderID, vertexCode, GL_VERTEX_SHADER);
-	AddShader(m_shaderID, fragmentCode, GL_FRAGMENT_SHADER);
+	AddShader(m_shaderID, vertexCode, GL_VERTEX_SHADER, m_vertHandle);
+	AddShader(m_shaderID, fragmentCode, GL_FRAGMENT_SHADER, m_fragHandle);
 
 	GLint result = 0;
 	GLchar log[1024]{};
@@ -101,11 +102,17 @@ void Shader::CompileShader(const char* vertexCode, const char* fragmentCode)
 		Logger::Log(LogType::ERROR, "ERROR VALIDATE: " + std::string(log));
 		return;
 	}
+
+	// NO NEED ?
+	glDetachShader(m_shaderID, m_vertHandle);
+	glDeleteShader(m_vertHandle);
+	glDetachShader(m_shaderID, m_fragHandle);
+	glDeleteShader(m_fragHandle);
 }
 
-void Shader::AddShader(GLuint program, const char* shaderCode, GLenum shaderType)
+void Shader::AddShader(GLuint program, const char* shaderCode, GLenum shaderType, GLuint& handle)
 {
-	GLuint shader = glCreateShader(shaderType);
+	handle = glCreateShader(shaderType);
 
 	const GLchar* code[1];
 	code[0] = shaderCode;
@@ -113,19 +120,19 @@ void Shader::AddShader(GLuint program, const char* shaderCode, GLenum shaderType
 	GLint length[1];
 	length[0] = strlen(shaderCode);
 
-	glShaderSource(shader, 1, code, length);
-	glCompileShader(shader);
+	glShaderSource(handle, 1, code, length);
+	glCompileShader(handle);
 	GLint result = 0;
 	GLchar log[1024]{};
 
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &result);
+	glGetShaderiv(handle, GL_COMPILE_STATUS, &result);
 
 	if (!result)
 	{
-		glGetShaderInfoLog(shader, sizeof(log), NULL, log);
+		glGetShaderInfoLog(handle, sizeof(log), NULL, log);
 		Logger::Log(LogType::ERROR, "ERROR COMPILE: " + std::string(log) + std::to_string(shaderType));
 		return;
 	}
 
-	glAttachShader(program, shader);
+	glAttachShader(program, handle);
 }

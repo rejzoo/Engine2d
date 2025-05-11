@@ -19,7 +19,7 @@ void PlayerController::UpdateMovement(float dt)
 	int deltaX = 0;
 	int deltaY = 0;
 
-	/*if (m_actionMapper.ActionDown(KeySection::MOVEMENT, Action::MOVE_UP))
+	if (m_actionMapper.ActionDown(KeySection::MOVEMENT, Action::MOVE_UP))
 	{
 		deltaY = 1;
 	} 
@@ -35,7 +35,7 @@ void PlayerController::UpdateMovement(float dt)
 	else if (m_actionMapper.ActionDown(KeySection::MOVEMENT, Action::MOVE_RIGHT))
 	{
 		deltaX = 1;
-	}*/
+	}
 
 	m_player->Move(dt, deltaX, deltaY);
 }

@@ -27,8 +27,6 @@ void Engine::Run()
 
 	m_camera->SetTarget(player);
 
-	GameObject obj(0, 0, 200, 200);
-
 	// DEBUG
 	while (!m_window->ShouldClose())
 	{
@@ -40,12 +38,13 @@ void Engine::Run()
 
 		Draw(dt);
 		player->Draw(m_renderer);
-		obj.Draw(m_renderer);
 		Update(dt);
 
 		m_window->SwapBuffers();
 		glfwPollEvents();
 	}
+
+	delete player;
 }
 
 void Engine::Init()
@@ -55,7 +54,6 @@ void Engine::Init()
 
 	m_input = new Input(m_window);
 	m_window->SetInput(m_input);
-
 	m_camera = new Camera2D();
 	m_renderer = new Renderer2D(m_camera);
 

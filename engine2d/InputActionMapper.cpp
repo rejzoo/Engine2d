@@ -12,7 +12,7 @@ void InputActionMapper::Init(Input* input)
 		m_input = input;
 	}
     
-    //LoadFromJson();
+    LoadFromJson();
 }
 
 bool InputActionMapper::ActionDown(KeySection section, Action action) const

@@ -11,11 +11,13 @@
 
 int main()
 {
+	// CHECKS LEAKS AFTER EXIT - BECAUSE OF STATIC
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	{
 		Engine engine;
 		engine.Run();
 	}
 
-	_CrtDumpMemoryLeaks();
 	return 0;
 }

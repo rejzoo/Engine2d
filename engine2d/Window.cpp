@@ -11,8 +11,8 @@ Window::Window()
 
 Window::~Window()
 {
+	glfwDestroyWindow(m_mainWindow);
 	glfwTerminate();
-	//delete m_mainWindow;
 }
 
 
