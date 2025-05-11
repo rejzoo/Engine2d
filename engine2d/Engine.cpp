@@ -59,7 +59,7 @@ void Engine::Init()
 	m_camera = new Camera2D();
 	m_renderer = new Renderer2D(m_camera);
 
-	ActionMapper& actionMapper = ActionMapper::Instance();
+	InputActionMapper& actionMapper = InputActionMapper::Instance();
 	actionMapper.Init(m_input);
 
 	m_playerController = new PlayerController();

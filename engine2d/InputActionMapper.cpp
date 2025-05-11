@@ -1,17 +1,53 @@
-﻿#include "KeyBindings.h"
+#include "InputActionMapper.h"
 
+InputActionMapper::~InputActionMapper()
+{
+    m_bindings.clear();
+}
 
-std::vector<int> KeyBindings::GetKeys(KeySection section, Action action) const
+void InputActionMapper::Init(Input* input)
+{
+	if (!m_input)
+	{
+		m_input = input;
+	}
+    
+    //LoadFromJson();
+}
+
+bool InputActionMapper::ActionDown(KeySection section, Action action) const
+{
+	for (int key : GetKeys(section, action))
+	{
+		if (m_input->KeyHeld(key))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool InputActionMapper::ActionPressed(KeySection section, Action action) const
+{
+	for (int key : GetKeys(section, action))
+	{
+		if (m_input->KeyPressed(key))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+std::vector<int> InputActionMapper::GetKeys(KeySection section, Action action) const
 {
     return m_bindings.at(section).at(action);
 }
 
-KeyBindings::KeyBindings()
-{
-    LoadFromJson();
-}
-
-void KeyBindings::LoadFromJson()
+// TODO IS LEAKING IDK HOW AND WHERE
+void InputActionMapper::LoadFromJson()
 {
     Logger::Log(LogType::MESSAGE, "Started loading keybindings.");
 
@@ -19,7 +55,7 @@ void KeyBindings::LoadFromJson()
     std::ifstream in("KeyBindings.json");
     in >> root;
 
-    for (auto& [sectionName, sectionValue] : root.items()) 
+    for (auto& [sectionName, sectionValue] : root.items())
     {
         KeySection section = SectionFromString(sectionName);
 
@@ -29,7 +65,7 @@ void KeyBindings::LoadFromJson()
 
             std::vector<int> keys;
 
-            for (int code : keysArray) 
+            for (int code : keysArray)
             {
                 keys.push_back(code);
             }
@@ -41,7 +77,7 @@ void KeyBindings::LoadFromJson()
 
                 m_bindings.emplace(section, std::move(innerMap));
             }
-            else 
+            else
             {
                 auto& innerMap = m_bindings.find(section)->second;
                 innerMap.emplace(action, std::move(keys));
@@ -54,25 +90,25 @@ void KeyBindings::LoadFromJson()
 
 // I DONT LIKE THIS, IF YOU SEE THIS FEEL AND KNOW BETTER 
 // FREE TO TELL ME, I WANT TO LEARN
-KeySection KeyBindings::SectionFromString(const std::string& section)
+KeySection InputActionMapper::SectionFromString(const std::string& section)
 {
     if (section == "MOVEMENT")
     {
         return KeySection::MOVEMENT;
     }
-    
+
     Logger::Log(LogType::ERROR, "UNKNOWN SECTION: " + section);
     throw UnknownSectionException(section);
 }
 
 // I DONT LIKE THIS, IF YOU SEE THIS FEEL AND KNOW BETTER 
 // FREE TO TELL ME, I WANT TO LEARN
-Action KeyBindings::ActionFromString(const std::string& action)
+Action InputActionMapper::ActionFromString(const std::string& action)
 {
     if (action == "MOVE_UP")
     {
         return Action::MOVE_UP;
-    } 
+    }
     else if (action == "MOVE_DOWN")
     {
         return Action::MOVE_DOWN;

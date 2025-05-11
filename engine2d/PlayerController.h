@@ -1,12 +1,12 @@
 #pragma once
 
-#include "ActionMapper.h"
+#include "InputActionMapper.h"
 #include "Player.h"
 
 class PlayerController
 {
 private:
-	ActionMapper& m_actionMapper;
+	InputActionMapper& m_actionMapper;
 	Player* m_player = nullptr;
 
 public:

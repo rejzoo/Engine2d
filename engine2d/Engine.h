@@ -5,7 +5,7 @@
 #include "Rectangle.h"
 #include "Camera2D.h"
 #include "Input.h"
-#include "ActionMapper.h"
+#include "InputActionMapper.h"
 #include "PlayerController.h"
 #include "Player.h"
 

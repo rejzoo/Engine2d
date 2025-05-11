@@ -4,7 +4,7 @@
 Camera2D::Camera2D()
 {
 	m_position = { 0, 0 };
-	m_cameraMoveState = CameraMoveState::FOLLOW;
+	m_cameraMoveState = CameraMoveState::STATIC;
 	m_cameraZoomState = CameraZoomState::ZOOM;
 	m_targetObj = nullptr;
 	m_zoom = CameraConfig::DEFAULT_ZOOM;
@@ -26,7 +26,7 @@ void Camera2D::Update(GLfloat dt, glm::vec2 position)
 {
 	if (m_cameraMoveState == CameraMoveState::STATIC)
 	{
-		return;
+		m_position = glm::vec2{ 0, 0 };
 	}
 	else if (m_cameraMoveState == CameraMoveState::FOLLOW)
 	{

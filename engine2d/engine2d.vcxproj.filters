@@ -87,10 +87,7 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="KeyBindings.cpp">
-      <Filter>Source Files\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="ActionMapper.cpp">
+    <ClCompile Include="InputActionMapper.cpp">
       <Filter>Source Files\Action</Filter>
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
@@ -131,16 +128,13 @@
     <ClInclude Include="Shader.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="KeyBindings.h">
-      <Filter>Header Files\Input</Filter>
-    </ClInclude>
     <ClInclude Include="Exceptions.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
     <ClInclude Include="Actions.h">
       <Filter>Header Files\Action</Filter>
     </ClInclude>
-    <ClInclude Include="ActionMapper.h">
+    <ClInclude Include="InputActionMapper.h">
       <Filter>Header Files\Action</Filter>
     </ClInclude>
     <ClInclude Include="PlayerController.h">
