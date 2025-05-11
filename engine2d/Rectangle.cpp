@@ -23,7 +23,21 @@ void Rectangle::SetPosition(glm::vec2 position)
 	m_position = position;
 }
 
+void Rectangle::SetRotation(float rotation)
+{
+	m_rotation = rotation;
+}
+
 void Rectangle::Draw(Renderer2D* renderer) const
 {
-	renderer->Draw(m_position, m_size, m_color);
+	glm::vec2 origin = (m_pivot == PivotMode::CENTER)
+		? (m_size * 0.5f) : glm::vec2(0.0f, 0.0f);
+
+	glm::mat4 model = glm::mat4(1.0f);
+	model = glm::translate(model, glm::vec3(m_position + origin, 0.0f));
+	model = glm::rotate(model, glm::radians(m_rotation), glm::vec3(0.0f, 0.0f, 1.0f));
+	model = glm::translate(model, glm::vec3(-origin, 0.0f));
+	model = glm::scale(model, glm::vec3(m_size, 1.0f));
+
+	renderer->Draw(model, m_color);
 }

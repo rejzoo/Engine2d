@@ -14,13 +14,9 @@ Renderer2D::~Renderer2D()
     delete(m_shader);
 }
 
-void Renderer2D::Draw(glm::vec2 position, glm::vec2 size, glm::vec4 color)
+void Renderer2D::Draw(glm::mat4 model, glm::vec4 color)
 {
     m_shader->UseShader();
-
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, glm::vec3(position, 0.0f));
-    model = glm::scale(model, glm::vec3(size, 1.0f));
 
     glm::mat4 projection = m_camera->GetView();
 

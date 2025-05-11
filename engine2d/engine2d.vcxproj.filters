@@ -40,12 +40,6 @@
     <Filter Include="Source Files\Util">
       <UniqueIdentifier>{f6af9af3-b4e1-4881-85ec-f9fe16f0800f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Action">
-      <UniqueIdentifier>{2194f66c-696f-41d4-a220-aac839b99c7e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Action">
-      <UniqueIdentifier>{d2cfd8c3-2fa5-4db0-9803-d43f006b6f96}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Controller">
       <UniqueIdentifier>{0b06c0d2-391e-4daf-bdd8-4ef9a70135e9}</UniqueIdentifier>
     </Filter>
@@ -87,9 +81,6 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="InputActionMapper.cpp">
-      <Filter>Source Files\Action</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerController.cpp">
       <Filter>Source Files\Controller</Filter>
     </ClCompile>
@@ -98,6 +89,9 @@
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InputActionMapper.cpp">
+      <Filter>Source Files\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -131,12 +125,6 @@
     <ClInclude Include="Exceptions.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Actions.h">
-      <Filter>Header Files\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="InputActionMapper.h">
-      <Filter>Header Files\Action</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerController.h">
       <Filter>Header Files\Controller</Filter>
     </ClInclude>
@@ -145,6 +133,12 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="InputActionMapper.h">
+      <Filter>Header Files\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

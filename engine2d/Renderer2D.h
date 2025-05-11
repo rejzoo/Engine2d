@@ -19,7 +19,7 @@ private:
 public:
 	Renderer2D(Camera2D* camera);
 	~Renderer2D();
-	void Draw(glm::vec2 position, glm::vec2 size, glm::vec4 color);
+	void Draw(glm::mat4 model, glm::vec4 color);
 
 private:
 	void InitQuad();
